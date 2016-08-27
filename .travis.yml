@@ -4,8 +4,14 @@ elixir:
 otp_release:
   - 19.0.2
 sudo: false
+cache:
+  directories:
+    - _build
+    - deps
 addons:
   postgresql: '9.5'
+services:
+  - postgresql
 before_script:
   - mix do ecto.create, ecto.migrate
 deploy:
