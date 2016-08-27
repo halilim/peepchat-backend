@@ -12,8 +12,12 @@ addons:
   postgresql: '9.5'
 services:
   - postgresql
+install:
+  - mix local.rebar
+  - mix local.hex
+  - mix deps.get
 before_script:
-  - mix do ecto.create, ecto.migrate
+  - MIX_ENV=test mix do ecto.create, ecto.migrate
 deploy:
   provider: heroku
   api_key:
