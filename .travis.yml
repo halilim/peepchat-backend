@@ -7,7 +7,7 @@ sudo: false
 addons:
   postgresql: '9.5'
 before_script:
-  - psql -c 'create database peepchat_test;' -U postgres
+  - mix do ecto.create, ecto.migrate
 deploy:
   provider: heroku
   api_key:
