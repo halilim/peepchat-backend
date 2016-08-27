@@ -1,0 +1,11 @@
+language: elixir
+elixir:
+  - 1.3.2
+otp_release:
+  - 19.0.2
+sudo: false
+addons:
+  postgresql: '9.5'
+before_script:
+  # Create the test database
+  - psql -c 'create database peepchat_test;' -U postgres
