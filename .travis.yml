@@ -7,5 +7,11 @@ sudo: false
 addons:
   postgresql: '9.5'
 before_script:
-  # Create the test database
   - psql -c 'create database peepchat_test;' -U postgres
+deploy:
+  provider: heroku
+  api_key:
+    secure: M1xl0/e5X/NS5RsmoYsfC+jthNweMJF6GzLxKAzts2bqPz696UIBR6WwBZ1fRsf0oxaBUzYubeZ2sOh/V0kXZMjAsnwfKnM36tq5202mEewHLOx9Us8pJySr3hp5Wj87YO4QKWjemj66BpoOvQvO5s0pd+iBKC+VMYqoLYVWXgd50/cOFBrzFOklHFJ/+oyDvfHKOJYqfrWYj+eYv59vG3hdvOuRFsPKK5tUFrwGNP+DG76chEtzaRDXjDFz5KbH5B3ZfaKzGj/jfphLNN7+h94LgTU4GVkvyfqoc1RFmaDz9cAJ0OiMsoxoeQjxBS2px9YU2Q730Ko/kIbOGZQchTIDtF9js8bNXgBm0W+Q/i+q9KDYgfv5mxIDyDYCTO38GbtNeZYvijJB9dWimYUblwAG50YmAxM5bP3SC9FW3JnyyvCjK01YcqfYm8l5AFU+jJszjjBjYX/GIcfg1U6JeQ+kz6TwAHG30ZfKFFMk7/17XzRuCwcleuItpzaT6M9mWRhHcZAILsxmaeaQiFGOkrBj7KkRok5zQtHJJV3sa24pWg13+G9hEOiSNU5BZiF9yRCCt6/8q9ESb3YVZTaIe7ASOUmvIh71ACL+OvH8umHNRCWkXYF3pPi1qKC5TsS3TXkhIJeysDisUvuM+ucb3KE1oYC92436366S6vCBHnI=
+  app: chathb
+  on:
+    repo: halilim/peepchat-backend
