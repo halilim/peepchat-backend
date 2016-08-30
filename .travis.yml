@@ -4,16 +4,11 @@ elixir:
 otp_release:
   - 19.0.2
 sudo: false
-cache:
-  directories:
-    - _build
-    - deps
 addons:
-  postgresql: '9.5'
-services:
-  - postgresql
+  postgresql: '9.4' # Use postgres 9.4
 before_script:
-  - MIX_ENV=test mix do ecto.create, ecto.migrate
+# Create the test database
+- psql -c 'create database peepchat_test;' -U postgres
 deploy:
   provider: heroku
   api_key:
