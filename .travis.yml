@@ -9,6 +9,7 @@ addons:
 before_script:
 # Create the test database
 - psql -c 'create database peepchat_test;' -U postgres
+- MIX_ENV=test mix ecto.migrate
 deploy:
   provider: heroku
   api_key:
@@ -16,3 +17,4 @@ deploy:
   app: chathb
   on:
     repo: halilim/peepchat-backend
+  run: "mix ecto.migrate"
