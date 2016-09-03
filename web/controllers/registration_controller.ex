@@ -20,7 +20,13 @@ defmodule Peepchat.RegistrationController do
       {:error, changeset} ->
         conn
         |> put_status(:unprocessable_entity)
-        |> render(Peepchat.ChangesetView, :error, changeset: changeset)
+        |> render(Peepchat.ChangesetView, "error.json-api", changeset: changeset)
     end
+  end
+
+  def create(conn, _) do
+    conn
+    |> put_status(:bad_request)
+    |> render(Peepchat.ErrorView, "400.json")
   end
 end

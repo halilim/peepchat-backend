@@ -1,8 +1,8 @@
 defmodule Peepchat.ErrorView do
   use Peepchat.Web, :view
 
-  def render("404.json", _assigns) do
-    %{title: "Page not found", code: 404}
+  def render("400.json", _assigns) do
+    %{title: "Bad request", code: 400}
     |> JaSerializer.ErrorSerializer.format
   end
 
@@ -13,6 +13,11 @@ defmodule Peepchat.ErrorView do
 
   def render("403.json", _assigns) do
     %{title: "Forbidden", code: 403}
+    |> JaSerializer.ErrorSerializer.format
+  end
+
+  def render("404.json", _assigns) do
+    %{title: "Page not found", code: 404}
     |> JaSerializer.ErrorSerializer.format
   end
 
