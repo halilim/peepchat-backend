@@ -12,7 +12,7 @@ defmodule Peepchat.UserControllerTest do
     {:ok, token, _} = user |> Guardian.encode_and_sign
 
     conn = conn
-    |> put_req_header("authorization", token)
+    |> put_req_header("authorization", "Bearer #{token}")
     |> get(current_user_path(conn, :current))
 
     assert json_response(conn, 200) == UserView.render("show.json-api", %{data: user})
