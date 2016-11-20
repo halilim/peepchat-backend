@@ -2,7 +2,7 @@ defmodule Peepchat.UserControllerTest do
   use Peepchat.ConnCase
 
   alias Peepchat.User
-  alias Peepchat.UserView
+  alias Peepchat.Endpoint
 
   test "returns the current user with valid auth headers", %{conn: conn} do
     user = Repo.insert!(%User{email: "mike@example.com",
@@ -15,7 +15,20 @@ defmodule Peepchat.UserControllerTest do
     |> put_req_header("authorization", "Bearer #{token}")
     |> get(current_user_path(conn, :current))
 
-    assert json_response(conn, 200) == UserView.render("show.json-api", %{data: user})
+    assert json_response(conn, 200)["data"] == %{
+      "id" => to_string(user.id),
+      "type" => "users",
+      "attributes" => %{
+        "email" => user.email
+      },
+      "relationships" => %{
+        "rooms" => %{
+          "links" => %{
+            "related" => user_rooms_url(Endpoint, :index, user)
+          }
+        }
+      }
+    }
   end
 
   test "returns 401 Unauthorized without valid auth headers", %{conn: conn} do
